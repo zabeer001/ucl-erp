@@ -1671,3 +1671,6 @@ Route::get('/home', [DashboardController::class, 'account_dashboard_index'])->na
 
 
 Route::any('/cookie-consent', [SystemController::class, 'CookieConsent'])->name('cookie-consent');
+
+require base_path('routes/zabeer.php');
+require base_path('routes/tonoy.php');
