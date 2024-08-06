@@ -15,7 +15,6 @@ class TeamController extends Controller
         $teams = Team::paginate(9);
         return view('team.index', compact('teams'));
     }
-    
     /**
      * Show the form for creating a new resource.
      */
@@ -45,7 +44,7 @@ class TeamController extends Controller
      */
     public function edit(Team $team)
     {
-        return view('team.edit',compact('team'));
+        return view('team.edit', compact('team'));
     }
 
     /**
@@ -54,6 +53,7 @@ class TeamController extends Controller
     public function update(Request $request, Team $team)
     {
         //
+
     }
 
     /**
