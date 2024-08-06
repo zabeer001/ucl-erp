@@ -29,9 +29,9 @@
                             <form action="{{ route('team.destroy', $e->id) }}" method="POST" style="display: inline-block;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit"
-                                    onclick="return confirm('Are you sure you want to delete this event?')">
-                                    <i class="fa-solid fa-trash" style="color: #ff0a0a;"></i>
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this event?')"
+                                    style="border: none">
+                                    <i class="fa-solid fa-trash p-1" style="color: #ff0a0a;"></i>
                                 </button>
                             </form>
                         </td>
