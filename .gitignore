@@ -9,3 +9,7 @@ composer.json
 /storage
 #public 
 /public
+
+/storage/framework/sessions
+/storage/framework/views
+/storage/logs
