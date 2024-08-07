@@ -3,3 +3,9 @@ composer.lock
 
 # Laravel & PHP specific
 .env
+
+# Laravel Debugbar specific
+/storage/debugbar
+
+#public 
+/public
