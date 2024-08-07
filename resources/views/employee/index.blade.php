@@ -30,7 +30,7 @@
         <div class="card">
         <div class="card-body table-border-style">
                     <div class="table-responsive">
-                    <table class="table datatable">
+                    <table class="table">
                             <thead>
                             <tr>
                                 <th>{{__('Employee ID')}}</th>

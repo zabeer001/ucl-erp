@@ -41,11 +41,11 @@ class EmployeeController extends Controller
         {
             if(Auth::user()->type == 'Employee')
             {
-                $employees = Employee::where('user_id', '=', Auth::user()->id)->with(['designation','branch','department'])->get();
+                $employees = Employee::where('user_id', '=', Auth::user()->id)->with(['designation','branch','department'])->paginate(9);
             }
             else
             {
-                $employees = Employee::where('created_by', \Auth::user()->creatorId())->with(['designation','branch','department'])->get();
+                $employees = Employee::where('created_by', \Auth::user()->creatorId())->with(['designation','branch','department'])->paginate(9);
             }
 
             return view('employee.index', compact('employees'));

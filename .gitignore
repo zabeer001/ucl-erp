@@ -1,5 +1,6 @@
 # Composer files
 composer.lock
+composer.json
 
 # Laravel & PHP specific
 .env
