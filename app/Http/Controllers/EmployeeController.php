@@ -37,24 +37,19 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        if(\Auth::user()->can('manage employee'))
-        {
-            if(Auth::user()->type == 'Employee')
-            {
-                $employees = Employee::where('user_id', '=', Auth::user()->id)->with(['designation','branch','department'])->paginate(9);
+        if (Auth::user()->can('manage employee')) {
+            if (Auth::user()->type == 'Employee') {
+                $employees = Employee::paginate(9);
+            } else {
+            $employees = Employee::paginate(9);
             }
-            else
-            {
-                $employees = Employee::where('created_by', \Auth::user()->creatorId())->with(['designation','branch','department'])->paginate(9);
-            }
-
+    
             return view('employee.index', compact('employees'));
-        }
-        else
-        {
+        } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
     }
+    
 
     public function create()
     {

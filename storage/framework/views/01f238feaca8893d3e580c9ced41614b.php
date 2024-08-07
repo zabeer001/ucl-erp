@@ -12,9 +12,6 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-
-
-
                     <th>Actions</th> <!-- New column for edit and delete buttons -->
                 </tr>
             </thead>
@@ -41,11 +38,9 @@
             </tbody>
         </table>
 
-        <div class="mt-3 p-1">
-            <?php echo e($teams->links('vendor.pagination.bootstrap-5')); ?>
-
-        </div>
+       
     </div>
+  
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\ucl-basic_erp\resources\views/team/index.blade.php ENDPATH**/ ?>

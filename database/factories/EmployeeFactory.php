@@ -34,7 +34,7 @@ class EmployeeFactory extends Factory
 
             'employee_id' => Str::random(10),
             'branch_id' => $this->faker->numberBetween(1, 10),
-            'department_id' => $this->faker->numberBetween(1, 10),
+            'department_id' => $this->faker->numberBetween(1, 3),
             'designation_id' => $this->faker->numberBetween(1, 10),
             'company_doj' => $this->faker->date(),
             'documents' => $this->faker->word,
