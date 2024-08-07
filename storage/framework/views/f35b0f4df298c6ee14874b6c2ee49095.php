@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('page-title'); ?>
     <?php echo e(__('Manage Employee')); ?>
 
@@ -30,7 +31,7 @@
         <div class="card">
         <div class="card-body table-border-style">
                     <div class="table-responsive">
-                    <table class="table datatable">
+                    <table class="table">
                             <thead>
                             <tr>
                                 <th><?php echo e(__('Employee ID')); ?></th>
