@@ -6,7 +6,6 @@ composer.json
 .env
 
 # Laravel Debugbar specific
-/storage/debugbar
-
+/storage
 #public 
 /public

@@ -3,121 +3,90 @@
     <?php echo e(__('Manage Employee')); ?>
 
 <?php $__env->stopSection(); ?>
-<?php $__env->startSection('breadcrumb'); ?>
-    <li class="breadcrumb-item"><a href="<?php echo e(route('dashboard')); ?>"><?php echo e(__('Dashboard')); ?></a></li>
-    <li class="breadcrumb-item"><?php echo e(__('Employee')); ?></li>
-<?php $__env->stopSection(); ?>
 
-
-<?php $__env->startSection('action-btn'); ?>
-    <div class="float-end">
-        <a href="#" data-size="md"  data-bs-toggle="tooltip" title="<?php echo e(__('Import')); ?>" data-url="<?php echo e(route('employee.file.import')); ?>" data-ajax-popup="true" data-title="<?php echo e(__('Import employee CSV file')); ?>" class="btn btn-sm btn-primary">
-            <i class="ti ti-file-import"></i>
-        </a>
-        <a href="<?php echo e(route('employee.export')); ?>" data-bs-toggle="tooltip" title="<?php echo e(__('Export')); ?>" class="btn btn-sm btn-primary">
-            <i class="ti ti-file-export"></i>
-        </a>
-        <a href="<?php echo e(route('employee.create')); ?>"
-            data-title="<?php echo e(__('Create New Employee')); ?>" data-bs-toggle="tooltip" title="" class="btn btn-sm btn-primary"
-            data-bs-original-title="<?php echo e(__('Create')); ?>">
-            <i class="ti ti-plus"></i>
-        </a>
-    </div>
-<?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-<div class="row">
-    <div class="col-xl-12">
-        <div class="card">
-        <div class="card-body table-border-style">
-                    <div class="table-responsive">
-                    <table class="table">
-                            <thead>
-                            <tr>
-                                <th><?php echo e(__('Employee ID')); ?></th>
-                                <th><?php echo e(__('Name')); ?></th>
-                                <th><?php echo e(__('Email')); ?></th>
-                                <th><?php echo e(__('Branch')); ?></th>
-                                <th><?php echo e(__('Department')); ?></th>
-                                <th><?php echo e(__('Designation')); ?></th>
-                                <th><?php echo e(__('Date Of Joining')); ?></th>
-                                <th> <?php echo e(__('Last Login')); ?></th>
-                                <th width="200px"><?php echo e(__('Action')); ?></th>
+<style>
+   .card{
+    overflow: auto;
+   }
+</style>
+    <div class="card">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Employee ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Branch ID</th>
+                    <th>Department ID</th>
+                    <th>Designation ID</th>
+                    <th>status</th>
+                    <th>Actions</th>
+                </tr>
 
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php $__currentLoopData = $employees; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $employee): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <tr>
-                                    <td class="Id">
-                                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('show employee profile')): ?>
-                                            <a href="<?php echo e(route('employee.show',\Illuminate\Support\Facades\Crypt::encrypt($employee->id))); ?>" class="btn btn-outline-primary"><?php echo e(\Auth::user()->employeeIdFormat($employee->employee_id)); ?></a>
-                                        <?php else: ?>
-                                            <a href="#"  class="btn btn-outline-primary"><?php echo e(\Auth::user()->employeeIdFormat($employee->employee_id)); ?></a>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td class="font-style"><?php echo e($employee->name); ?></td>
-                                    <td><?php echo e($employee->email); ?></td>
-                                    <?php if($employee->branch_id): ?>
-                                        <td class="font-style"><?php echo e($employee->branch  ? $employee->branch->name:''); ?></td>
-                                    <?php else: ?>
-                                        <td>-</td>
-                                    <?php endif; ?>
-                                    <?php if($employee->department_id): ?>
-                                        <td class="font-style"><?php echo e($employee->department?$employee->department->name:''); ?></td>
-                                    <?php else: ?>
-                                        <td>-</td>
-                                    <?php endif; ?>
-                                    <?php if($employee->designation_id): ?>
-                                        <td class="font-style"><?php echo e(!$employee->designation?$employee->designation->name:''); ?></td>
-                                    <?php else: ?>
-                                        <td>-</td>
-                                    <?php endif; ?>
-                                    <?php if($employee->company_doj): ?>
-                                        <td class="font-style"><?php echo e(\Auth::user()->dateFormat($employee->company_doj )); ?></td>
-                                    <?php else: ?>
-                                        <td>-</td>
-                                    <?php endif; ?>
-                                    <td>
-                                        <?php echo e((!empty($employee->user->last_login_at)) ? $employee->user->last_login_at : '-'); ?>
+            </thead>
+            <tbody>
+                <?php $__currentLoopData = $employees; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $e): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <tr>
 
-                                    </td>
-                                    <?php if(Gate::check('edit employee') || Gate::check('delete employee')): ?>
-                                        <td>
-                                            <?php if($employee->is_active==1): ?>
-                                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('edit employee')): ?>
-                                                <div class="action-btn bg-primary ms-2">
-                                                    <a href="<?php echo e(route('employee.edit',\Illuminate\Support\Facades\Crypt::encrypt($employee->id))); ?>" class="mx-3 btn btn-sm align-items-center" data-bs-toggle="tooltip" title="<?php echo e(__('Edit')); ?>"
-                                                     data-original-title="<?php echo e(__('Edit')); ?>"><i class="ti ti-pencil text-white"></i></a>
-                                                </div>
+                        <?php
+                            // Fetch the string from the forign ids
+                            //branch
+                            $branch = \App\Models\Branch::find($e->branch_id);
+                            $branchName = $branch ? $branch->name : 'Not Available';
 
-                                                    <?php endif; ?>
-                                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('delete employee')): ?>
-                                                <div class="action-btn bg-danger ms-2">
-                                                <?php echo Form::open(['method' => 'DELETE', 'route' => ['employee.destroy', $employee->id],'id'=>'delete-form-'.$employee->id]); ?>
+                            //department
+                            $department = \App\Models\Department::find($e->department_id);
+                            $departmentName = $department ? $department->name : 'Not Available';
+
+                            //designation 
+                            $designation = \App\Models\Department::find($e->designation_id);
+                            $designationName = $designation ? $designation->name : 'Not Available';
+                      
+                        ?>
+                        <td><?php echo e($e->user_id); ?></td>
+                        <td><?php echo e($e->employee_id); ?></td>
+                        <td><?php echo e($e->name); ?></td>
+                        <td><?php echo e($e->phone); ?></td>
+                        <td><?php echo e($e->email); ?></td>
+                        <td><?php echo e($branchName); ?></td>
+                        <td><?php echo e($departmentName); ?></td>
+                        <td><?php echo e($designationName); ?></td>
+                        <td>
+                            <?php if($e->is_active): ?>
+                                <button class="btn btn-success btn-sm">Active</button>
+                            <?php else: ?>
+                                <button class="btn btn-danger btn-sm">Inactive</button>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <a href="<?php echo e(route('employee.edit', $e->id)); ?>">
+                                <i class="fa-solid fa-pen-to-square" style="color: #004fd6;"></i>
+                            </a>
+                            <form action="<?php echo e(route('employee.destroy', $e->id)); ?>" method="POST" style="display: inline-block;">
+                                <?php echo csrf_field(); ?>
+                                <?php echo method_field('DELETE'); ?>
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this event?')" style="border:none;background:none;">
+                                    <i class="fa-solid fa-trash" style="color: #ff0a0a;"></i> 
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+            </tbody>
+
+        </table>
 
 
-                                                    <a href="#" class="mx-3 btn btn-sm align-items-center bs-pass-para" data-bs-toggle="tooltip" title="<?php echo e(__('Delete')); ?>" data-original-title="<?php echo e(__('Delete')); ?>" data-confirm="<?php echo e(__('Are You Sure?').'|'.__('This action can not be undone. Do you want to continue?')); ?>" data-confirm-yes="document.getElementById('delete-form-<?php echo e($employee->id); ?>').submit();"><i class="ti ti-trash text-white"></i></a>
-                                                    <?php echo Form::close(); ?>
-
-                                                </div>
-                                                <?php endif; ?>
-                                            <?php else: ?>
-
-                                                <i class="ti ti-lock"></i>
-                                            <?php endif; ?>
-                                        </td>
-                                    <?php endif; ?>
-                                </tr>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-</div>
+    <div class="mt-3 p-1">
+        <?php echo e($employees->links('vendor.pagination.bootstrap-5')); ?>
+
+    </div>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\ucl-basic_erp\resources\views/employee/index.blade.php ENDPATH**/ ?>

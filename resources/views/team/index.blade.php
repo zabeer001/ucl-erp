@@ -11,9 +11,6 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-
-
-
                     <th>Actions</th> <!-- New column for edit and delete buttons -->
                 </tr>
             </thead>
@@ -40,8 +37,7 @@
             </tbody>
         </table>
 
-        <div class="mt-3 p-1">
-            {{ $teams->links('vendor.pagination.bootstrap-5') }}
-        </div>
+       
     </div>
+  
 @endsection
