@@ -3,35 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Employee extends Model
 {
-    protected $fillable = [
-        'user_id',
-        'name',
-        'dob',
-        'gender',
-        'phone',
-        'address',
-        'email',
-        'password',
-        'employee_id',
-        'branch_id',
-        'department_id',
-        'designation_id',
-        'company_doj',
-        'documents',
-        'account_holder_name',
-        'account_number',
-        'bank_name',
-        'bank_identifier_code',
-        'branch_location',
-        'tax_payer_id',
-        'salary_type',
-        'account',
-        'salary',
-        'created_by',
-    ];
+    use HasFactory;
+   
 
     public function documents()
     {
