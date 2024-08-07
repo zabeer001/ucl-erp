@@ -9,9 +9,9 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Actions</th> <!-- New column for edit and delete buttons -->
+                    <th>{{ __('ID') }}</th>
+                    <th>{{ __('Title') }}</th>
+                    <th>{{ __('Actions') }}</th> <!-- New column for edit and delete buttons -->
                 </tr>
             </thead>
             <tbody>
@@ -21,7 +21,7 @@
                         <td>{{ $e->title }}</td>
                         <td>
                             <a href="{{ route('knowledge.show', $e->id) }}" class="pe-lg-2">
-                                <i class="fa-solid fa-circle-info" style="color: #e4d615;"></i>
+                                <i class="fa-solid fa-eye"></i>
                             </a>
                             <a href="{{ route('knowledge.edit', $e->id) }}">
                                 <i class="fa-solid fa-pen-to-square" style="color: #004fd6;"></i>
