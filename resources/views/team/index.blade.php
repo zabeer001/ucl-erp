@@ -20,6 +20,9 @@
                         <td>{{ $e->id }}</td>
                         <td>{{ $e->name }}</td>
                         <td>
+                            <a href="{{ route('team.show', $e->id) }}" style="color: green; margin-right: 10px;" title="View">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
                             <a href="{{ route('team.edit', $e->id) }}">
                                 <i class="fa-solid fa-pen-to-square" style="color: #004fd6;"></i>
                             </a>

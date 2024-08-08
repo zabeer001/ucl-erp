@@ -21,6 +21,9 @@
                         <td><?php echo e($e->id); ?></td>
                         <td><?php echo e($e->name); ?></td>
                         <td>
+                            <a href="<?php echo e(route('team.show', $e->id)); ?>" style="color: green; margin-right: 10px;" title="View">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
                             <a href="<?php echo e(route('team.edit', $e->id)); ?>">
                                 <i class="fa-solid fa-pen-to-square" style="color: #004fd6;"></i>
                             </a>
