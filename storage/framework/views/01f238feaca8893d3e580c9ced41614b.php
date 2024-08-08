@@ -27,7 +27,7 @@
                             <form action="<?php echo e(route('team.destroy', $e->id)); ?>" method="POST" style="display: inline-block;">
                                 <?php echo csrf_field(); ?>
                                 <?php echo method_field('DELETE'); ?>
-                                <button type="submit" onclick="return confirm('Are you sure you want to delete this event?')">
+                                <button type="submit" style="border:none;background:none;" onclick="return confirm('Are you sure you want to delete this event?')" >
                                     <i class="fa-solid fa-trash" style="color: #ff0a0a;"></i> 
                                 </button>
                             </form>
