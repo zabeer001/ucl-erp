@@ -70,7 +70,7 @@
 @stack('script-page')
 
 @stack('old-datatable-js')
-
+{{-- 
 <script>
 
 
@@ -104,6 +104,7 @@
     }
 
     var custthemebg = document.querySelector("#cust-theme-bg");
+    
     custthemebg.addEventListener("click", function () {
         if (custthemebg.checked) {
             document.querySelector(".dash-sidebar").classList.add("transprent-bg");
@@ -148,6 +149,8 @@
             }
         }
     }
-</script>
+
+</script> --}}
+
 
 

@@ -39,5 +39,24 @@
 
        
     </div>
+    <div class="mt-3 p-1">
+        {{ $teams->links('vendor.pagination.bootstrap-5') }}
+    </div>
+    <script>
+        console.log('hello');
+        
+       </script>
   
 @endsection
+
+@section('scripts')
+
+<script>
+    $(document).ready(function () {
+        console.log('ok, jquery');
+        
+    });
+</script>
+    
+@endsection
+

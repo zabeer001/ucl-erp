@@ -14,6 +14,10 @@ class EmployeesTableSeeder extends Seeder
      */
     public function run()
     {
-        Employee::factory()->count(50)->create();
+        for($i=0;$i<1000;$i++){
+
+            Employee::factory()->count(120)->create();
+        }
+  
     }
 }

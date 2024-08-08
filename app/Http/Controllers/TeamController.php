@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Team;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class TeamController extends Controller
@@ -21,7 +22,8 @@ class TeamController extends Controller
      */
     public function create()
     {
-        return view('team.create');
+        $employees = Employee::all();
+        return view('team.create',compact('employees'));
     }
 
     /**
@@ -29,7 +31,16 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $team = new Team();
+        $team->name = $request->name;
+        $team->description = $request->description;
+        $team->save();
+
+        if ($request->input('employees')) {
+
+            $team->employees()->sync($request->input('employees'));
+        }
+        return redirect()->route('team.index')->with('success', 'Team created successfully');
     }
 
     /**
@@ -45,22 +56,49 @@ class TeamController extends Controller
      */
     public function edit(Team $team)
     {
-        return view('team.edit',compact('team'));
+        $employees = Employee::all();
+        return view('team.edit',compact('team','employees'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Team $team)
+    public function update(Request $request, $id)
     {
-        //
+        // Find the team by its ID
+        $team = Team::findOrFail($id);
+    
+        // Update team details
+        $team->name = $request->name;
+        $team->description = $request->description;
+        $team->save();
+    
+        // Update associated employees
+        if ($request->input('employees')) {
+            $team->employees()->sync($request->input('employees'));
+        } else {
+            // If no employees are selected, detach all employees from the team
+            $team->employees()->detach();
+        }
+    
+        // Redirect or return a response as needed
+        return redirect()->route('team.index')->with('success', 'Team updated successfully');
     }
+    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Team $team)
     {
-        //
+        // Delete the relationships in the employee_team table
+        $team->employees()->detach(); // Remove all employee-team associations
+    
+        // Optionally, you can handle any additional logic here
+        $team->delete();
+    
+        // Redirect or return a response as needed
+        return redirect()->route('team.index')->with('success', 'Employee-team associations removed successfully');
     }
+    
 }

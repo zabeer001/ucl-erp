@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Team extends Model
 {
     use HasFactory;
+    public function employees()
+    {
+        return $this->belongsToMany(Employee::class, 'employee_team','team_id','employee_id');
+    }
 }
+
+

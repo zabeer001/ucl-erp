@@ -16,21 +16,16 @@
             <label for="description">Description</label>
             <textarea class="form-control" id="description" name="description" rows="5"></textarea>
         </div>
-        
-        <div class="repeater">
-            <div data-repeater-list="members">
-                <div data-repeater-item class="form-group">
-                    <label for="member_name">Member Name</label>
-                    <input type="text" class="form-control" id="member_name" name="member_name">
-                    
-                    <label for="member_email">Member Email</label>
-                    <input type="email" class="form-control" id="member_email" name="member_email">
-                    
-                    <button type="button" class="btn btn-danger" data-repeater-delete>Delete</button>
-                </div>
-            </div>
-            <button type="button" class="btn btn-primary" data-repeater-create>Add Member</button>
-        </div>
+        <div class="form-group">
+            <label for="employee_id">Employee ID</label>
+            <select class="form-control" name="employees[]" multiple="multiple" id="employees">
+                @foreach ($employees as $e)
+                    <option value="{{ $e->id }}">{{ $e->id }}</option>
+                @endforeach
+
+
+            </select>
+        </div> 
    
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
@@ -38,24 +33,14 @@
 @endsection
 
 @section('scripts')
+
 <script>
-$(document).ready(function () {
-    $('.repeater').repeater({
-        initEmpty: false,
-        defaultValues: {
-            'member_name': '',
-            'member_email': ''
-        },
-        show: function () {
-            $(this).slideDown();
-        },
-        hide: function (deleteElement) {
-            if (confirm('Are you sure you want to delete this element?')) {
-                $(this).slideUp(deleteElement);
-            }
-        },
-        isFirstItemUndeletable: true
-    });
-});
+    $(document).ready(function() {
+            $('#employees').select2();
+        });
+
 </script>
+    
 @endsection
+
+

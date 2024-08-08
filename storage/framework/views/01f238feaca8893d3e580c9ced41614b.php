@@ -40,7 +40,27 @@
 
        
     </div>
+    <div class="mt-3 p-1">
+        <?php echo e($teams->links('vendor.pagination.bootstrap-5')); ?>
+
+    </div>
+    <script>
+        console.log('hello');
+        
+       </script>
   
 <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+
+<script>
+    $(document).ready(function () {
+        console.log('ok, jquery');
+        
+    });
+</script>
+    
+<?php $__env->stopSection(); ?>
+
 
 <?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\ucl-basic_erp\resources\views/team/index.blade.php ENDPATH**/ ?>
