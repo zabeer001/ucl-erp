@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('page-title')
-    {{ __('Saturday Start Time') }}
+    {{ __('Roster Time') }}
 @endsection
 
 
