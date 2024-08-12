@@ -5,38 +5,38 @@
 
 
 @section('content')
-<form action="{{ route('employee_roster.store') }}" method="POST">
-    @csrf
+    <form action="{{ route('employee_roster.store') }}" method="POST">
+        @csrf
 
-    <div class="row">
-        <div class="col-5">
-            <div class="form-group">
-                <label for="employee_id">Employee ID</label>
-                <select class="form-control" name="employees[]" multiple="multiple" id="employees">
-                    @foreach ($employees as $e)
-                        <option value="{{ $e->id }}">{{ $e->id }}</option>
-                    @endforeach
+        <div class="row">
+            <div class="col-5">
+                <div class="form-group">
+                    <label for="employee_id">Employee ID</label>
+                    <select class="form-control" name="employees[]" multiple="multiple" id="employees">
+                        @foreach ($employees as $e)
+                            <option value="{{ $e->id }}">{{ $e->id }}</option>
+                        @endforeach
 
 
-                </select>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="col-5">
-            <div class="form-group">
-                <label for="roster_id">roster ID</label>
-                <select class="form-control" name="roster[]" multiple="multiple" id="rosters">
-                    @foreach ($rosters as $e)
-                        <option value="{{ $e->id }}">{{ $e->id }}</option>
-                    @endforeach
-                </select>
+            <div class="col-5">
+                <div class="form-group">
+                    <label for="roster_id">roster ID</label>
+                    <select class="form-control" name="roster[]" multiple="multiple" id="rosters">
+                        @foreach ($rosters as $e)
+                            <option value="{{ $e->id }}">{{ $e->id }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="col-2">
-            <button class="btn btn-sm btn-primary mt-4">appoint</button>
-        </div>
+            <div class="col-2">
+                <button class="btn btn-sm btn-primary mt-4">appoint</button>
+            </div>
 
-    </div>
-</form>
+        </div>
+    </form>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -55,17 +55,27 @@
                 ?>
                 <tr>
 
-                    <th>{{ $e->employee_id }}</th>
-                    <th>{{ $employee->name }}</th>
-                    <th>{{ $e->roster_id }}</th>
-
+                    <td>{{ $e->employee_id }}</td>
+                    <td>{{ $employee->name }}</td>
+                    <td>{{ $e->roster_id }}</td>
+                    <td>
+                        <form action="{{ route('employee_roster.destroy', $e->id) }}" method="POST"
+                            style="display: inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this Roster?')"
+                                style="border: none">
+                                <i class="fa-solid fa-trash p-1" style="color: #ff0a0a;"></i>
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
 
 
         </tbody>
     </table>
-   
+
 
 
     <div class="card" style="overflow: auto">
@@ -80,7 +90,7 @@
                     <th>Wednesday (Start - end)</th>
                     <th>Thursday (Start - end)</th>
                     <th>Friday (Start - end)</th>
-                     <!-- New column for edit and delete buttons -->
+                    <!-- New column for edit and delete buttons -->
                 </tr>
             </thead>
             <tbody>
@@ -101,7 +111,7 @@
                             {{ date('h:i A', strtotime($e->thursday_end_time)) }}</td>
                         <td>{{ date('h:i A', strtotime($e->friday_start_time)) }} -
                             {{ date('h:i A', strtotime($e->friday_end_time)) }}</td>
-                        
+
                     </tr>
                 @endforeach
             </tbody>

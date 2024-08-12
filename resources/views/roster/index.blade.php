@@ -50,7 +50,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                    onclick="return confirm('Are you sure you want to delete this knowledge?')"
+                                    onclick="return confirm('Are you sure you want to delete this Roster?')"
                                     style="border: none">
                                     <i class="fa-solid fa-trash p-1" style="color: #ff0a0a;"></i>
                                 </button>
