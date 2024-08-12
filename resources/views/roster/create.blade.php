@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('page-title')
-    {{ __('Saturday') }}
+    {{ __('Rosters') }}
 @endsection
 
 @section('content')
